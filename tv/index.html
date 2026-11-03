@@ -1,28 +1,69 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BCVHS TV</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #080b18;
-      color: #e6edff;
-      font-family: monospace;
-      text-align: center;
-    }
-    h1 { color: #80ffbe; font-size: 3rem; }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BCVHS TV · Cable 86</title>
+<style>
+:root{color-scheme:dark;--blue:#071f79;--yellow:#fff263;--line:#7993c5}*{box-sizing:border-box}body{margin:0;background:#080c1a;color:#fff;font-family:Arial,Helvetica,sans-serif}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}.receiver{max-width:1180px;margin:24px auto;border:5px ridge #8e99aa;background:var(--blue);box-shadow:0 15px 60px #000}.mast{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;background:#031345;border-bottom:3px solid #89a5db}.logo{font-weight:900;font-size:30px;letter-spacing:2px;color:var(--yellow);text-shadow:3px 3px #000}.logo small{font-size:13px;display:block;color:#b8cbf1;letter-spacing:4px;margin-top:4px}.clock{text-align:right;font-weight:bold;font-size:22px}.clock small{display:block;font-size:12px;margin-top:5px;color:#becded}.upper{display:grid;grid-template-columns:1.65fr 1fr;border-bottom:4px ridge #adc2eb}.screen{position:relative;background:#000;aspect-ratio:4/3;min-width:0;display:grid;place-items:center}video{width:100%;height:100%;position:absolute;object-fit:contain}.power{z-index:2;padding:20px 28px;color:#fff263;background:#071f79;border:3px outset #a6b9e6;font-weight:bold;font-size:20px}.power[hidden]{display:none}.info{padding:24px;background:linear-gradient(#102f8e,#061b60);min-width:0}.eyebrow{color:#fff263;font-size:13px;letter-spacing:2px;font-weight:bold}.station{font-size:29px;margin:12px 0 5px}.program{font-size:25px;line-height:1.2;margin:18px 0 8px}.description{color:#d3dff6;line-height:1.5;font-size:15px}.status{min-height:42px;font-size:14px;color:#fff263;line-height:1.5}.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.controls button{border:2px outset #a9b8d4;background:#163485;color:#fff;padding:9px 12px}.source{display:inline-block;color:#c9dbff;font-size:13px;margin-top:17px}.guide-title{display:flex;justify-content:space-between;gap:15px;padding:12px 18px;background:#123790;color:#fff263;font-weight:bold;font-size:22px;letter-spacing:1px}.guide-title span:last-child{font-size:12px;align-self:center;letter-spacing:0;color:#d6e2ff}.guide-wrap{overflow-x:auto}.guide{min-width:650px}.guide-head,.channel{display:grid;grid-template-columns:205px 1.2fr 1fr}.guide-head{background:#041348;color:#c9daff;font-weight:bold;font-size:13px}.guide-head div{padding:10px 14px;border:1px solid #5576b3}.channel{width:100%;border:0;background:#092b86;color:white;text-align:left;padding:0}.channel>span{padding:15px 14px;border:1px solid #6483bf;display:flex;flex-direction:column;justify-content:center;min-height:80px}.channel:hover{background:#2149a3}.channel[aria-pressed=true]{background:var(--yellow);color:#071d68}.channel .number{font-size:23px;font-weight:900;display:inline;margin-right:9px}.channel strong{font-size:16px}.channel small{font-size:12px;opacity:.8;margin-top:6px}.foot{padding:13px 18px;font-size:12px;color:#c0d0ed;display:flex;justify-content:space-between;gap:12px;background:#031345}.ticker{padding:14px;color:#fff263;font-weight:bold;text-align:center;border-top:2px solid #7893cd;letter-spacing:2px}body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0px,transparent 3px,#00000013 4px);opacity:.5}@media(max-width:760px){.receiver{margin:0;border-width:2px}.upper{grid-template-columns:1fr}.info{padding:18px}.station{font-size:24px}.program{font-size:22px;margin-top:12px}.description{margin:8px 0}.controls{margin-top:12px}.mast{padding:12px}.logo{font-size:23px}.clock{font-size:17px}.guide-title{font-size:18px}.foot{flex-direction:column}.screen{aspect-ratio:4/3}}@media(prefers-reduced-motion:reduce){body::after{display:none}}
+</style>
 </head>
 <body>
-  <main>
-    <h1>BCVHS TV</h1>
-    <p>PLEASE STAND BY</p>
-    <p>Your regularly scheduled weirdness is coming soon.</p>
-  </main>
+<main class="receiver">
+<header class="mast"><div class="logo">BCVHS <span style="color:white">TV</span><small>CABLE 86 · ON THE AIR</small></div><div class="clock"><time id="clock"></time><small id="date"></small></div></header>
+<section class="upper" aria-label="Television player">
+<div class="screen"><video id="video" controls playsinline preload="none" aria-label="Current channel video"></video><button class="power" id="power">POWER ON ▷</button></div>
+<div class="info"><div class="eyebrow">YOU ARE WATCHING</div><h1 class="station" id="station"></h1><h2 class="program" id="program"></h2><div id="times"></div><p class="description" id="description"></p><p id="status" class="status" role="status" aria-live="polite">Press POWER ON to join the broadcast.</p><div class="controls"><button id="down" aria-label="Previous channel">CH −</button><button id="up" aria-label="Next channel">CH +</button><button id="live">TUNE LIVE</button><button id="fullscreen">FULL SCREEN</button></div><a id="source" class="source" target="_blank" rel="noopener">View original tape ↗</a></div>
+</section>
+<div class="guide-title"><span>BCVHS PROGRAM GUIDE</span><span>SELECT A CHANNEL · JOIN IN PROGRESS</span></div>
+<div class="guide-wrap"><div class="guide"><div class="guide-head"><div>CHANNEL</div><div>ON NOW</div><div>UP NEXT</div></div><div id="channels"></div></div></div>
+<div class="ticker">ALL NIGHT. EVERY NIGHT. FROM BEYOND.</div>
+<footer class="foot"><span>↑ ↓ CHANNEL SURF · F FULL SCREEN · L TUNE LIVE</span><span>LOCAL TIME · EXPERIMENTAL SIGNAL · v0.1</span></footer>
+</main>
+<script>
+'use strict';
+const CHANNELS = [{"number":"13","name":"MIDNIGHT PICTURES","tag":"HORROR / CREATURE FEATURES","description":"The late show never ends. Strange houses, bad dreams, and things that should have stayed buried.","programs":[{"title":"THE PIT 1981 EMBASSY HOME ENTERTAINMENT","duration":5872.48,"url":"https://archive.org/download/the-pit-1981-embassy-home-entertainment-vhs-rip/THE%20PIT%201981%20EMBASSY%20HOME%20ENTERTAINMENT%20VHS%20RIP.mp4","source":"https://archive.org/details/the-pit-1981-embassy-home-entertainment-vhs-rip"},{"title":"Grampa Presents Carnival Of Souls (1988)","duration":4704.2,"url":"https://archive.org/download/grampa-presents-carnival-of-souls/Carnival%20Of%20Souls%20%28Grandpa%20Presents%29%20VHS%20rip.mp4","source":"https://archive.org/details/grampa-presents-carnival-of-souls"}]},{"number":"24","name":"KUNG FU THEATER","tag":"MARTIAL ARTS / NINJAS","description":"Your all-night dojo. Flying fists, impossible odds, and another challenger just around the corner.","programs":[{"title":"Spiritual Kung Fu (1978)","duration":5802.3,"url":"https://archive.org/download/spiritual-kung-fu-vhs-rip/Spiritual%20Kung%20Fu%20%28VHS%20Rip%29.mp4","source":"https://archive.org/details/spiritual-kung-fu-vhs-rip"},{"title":"Snake And Crane Arts Of Shaolin","duration":5678.7,"url":"https://archive.org/download/snake-and-crane-arts-of-shaolin-vhs-rip/Snake%20and%20Crane%20Arts%20of%20Shaolin%20%28VHS%20Rip%29.mp4","source":"https://archive.org/details/snake-and-crane-arts-of-shaolin-vhs-rip"}]},{"number":"42","name":"BEYOND EARTH","tag":"SCIENCE FICTION","description":"Dispatches from the outer limits. Time travelers, alien visitors, and futures gone wrong.","programs":[{"title":"TRANCERS 1985 VESTRON VIDEO","duration":4686.3,"url":"https://archive.org/download/trancers-1985-vestron-video-vhs-rip/TRANCERS%201985%20VESTRON%20VIDEO%20VHS%20RIP.mp4","source":"https://archive.org/details/trancers-1985-vestron-video-vhs-rip"},{"title":"ALIEN INTRUDER 1992","duration":5829.73,"url":"https://archive.org/download/alien-intruder-1992-vhs-transfer/ALIEN%20INTRUDER%201992%20VHS%20TRANSFER.mp4","source":"https://archive.org/details/alien-intruder-1992-vhs-transfer"}]},{"number":"55","name":"ACTION VIDEO","tag":"ACTION / ADVENTURE","description":"Maximum impact. No quiet nights. Martial-arts mayhem and high-speed escapes, straight from the video shelf.","programs":[{"title":"EXPECT NO MERCY 1995","duration":5630.08,"url":"https://archive.org/download/expect-no-mercy-1995-vhs-rip/EXPECT%20NO%20MERCY%201995%20VHS%20RIP.mp4","source":"https://archive.org/details/expect-no-mercy-1995-vhs-rip"},{"title":"FAST GETAWAY II 1993","duration":6108.62,"url":"https://archive.org/download/fast-getaway-ii-1993-vhs-transfer/FAST%20GETAWAY%20II%201993%20VHS%20TRANSFER.mp4","source":"https://archive.org/details/fast-getaway-ii-1993-vhs-transfer"}]},{"number":"69","name":"AFTER HOURS","tag":"SEX COMEDY / MATURE AUDIENCES","description":"The late-night comedy shelf. Mature themes and nudity. Our first tape repeats while the collection grows.","programs":[{"title":"Hardbodies 2","duration":5281.24,"url":"https://archive.org/download/hardbodies-2/Hardbodies2.ia.mp4","source":"https://archive.org/details/hardbodies-2"}]}];
+const epoch = Date.UTC(2026,10,2,0,0,0);
+const $=id=>document.getElementById(id), video=$('video');
+let selected=0,powered=false,activeKey='',waitingKey='',tuneVersion=0,ready=false;
+const time=t=>new Date(t).toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+function position(channel,now=Date.now()){
+ const total=channel.programs.reduce((n,p)=>n+Math.round(p.duration*1000),0);
+ const elapsed=now-epoch,offset=((elapsed%total)+total)%total;
+ let sum=0;
+ for(let i=0;i<channel.programs.length;i++){const p=channel.programs[i];if(offset<sum+Math.round(p.duration*1000)){const start=now-(offset-sum);return {p,index:i,offset:(offset-sum)/1000,start,end:start+Math.round(p.duration*1000),next:channel.programs[(i+1)%channel.programs.length],key:channel.number+':'+i+':'+Math.round(start/1000)}}sum+=Math.round(p.duration*1000)}
+}
+function render(allowTune=true){
+ $('clock').textContent=new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit',second:'2-digit'});
+ $('date').textContent=new Date().toLocaleDateString([],{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+ const c=CHANNELS[selected],s=position(c);
+ $('station').textContent='CH '+c.number+' · '+c.name;$('program').textContent=s.p.title;
+ $('times').textContent=time(s.start)+' – '+time(s.end);$('description').textContent=c.description;
+ $('source').href=s.p.source;
+ CHANNELS.forEach((ch,i)=>{const p=position(ch),b=$('ch-'+i);b.setAttribute('aria-pressed',String(i===selected));b.querySelector('.now').textContent=p.p.title;b.querySelector('.next').textContent=p.next.title;b.querySelector('.nowtime').textContent=time(p.start)+' – '+time(p.end);b.querySelector('.nexttime').textContent='Starts '+time(p.end)});
+ if(allowTune&&powered&&activeKey&&s.key!==activeKey&&s.key!==waitingKey)tune(selected);
+}
+function seekLive(){const s=position(CHANNELS[selected]);const max=Number.isFinite(video.duration)?Math.max(0,video.duration-.25):s.offset;video.currentTime=Math.min(s.offset,max)}
+async function play(){try{await video.play();$('status').textContent='Signal acquired · joined in progress.'}catch(e){$('status').textContent='Press play on the video to continue.'}}
+function tune(index){
+ selected=(index+CHANNELS.length)%CHANNELS.length;render(false);if(!powered)return;
+ const s=position(CHANNELS[selected]),version=++tuneVersion;activeKey='';waitingKey=s.key;ready=false;
+ video.pause();$('status').textContent='Tuning… Archive tapes may take a moment to load.';
+ video.onloadedmetadata=()=>{if(version!==tuneVersion)return;try{seekLive();activeKey=s.key;waitingKey='';ready=true;play()}catch(e){$('status').textContent='Could not seek into this tape. Try TUNE LIVE or the original source.'}};
+ video.onerror=()=>{if(version!==tuneVersion)return;waitingKey='';$('status').textContent='Signal unavailable. Try TUNE LIVE, another channel, or the original tape link.'};
+ video.src=s.p.url;video.load();
+}
+CHANNELS.forEach((c,i)=>{const b=document.createElement('button');b.className='channel';b.id='ch-'+i;b.innerHTML='<span><strong><span class="number">'+c.number+'</span>'+c.name+'</strong><small>'+c.tag+'</small></span><span><strong class="now"></strong><small class="nowtime"></small></span><span><strong class="next"></strong><small class="nexttime"></small></span>';b.onclick=()=>tune(i);$('channels').append(b)});
+$('power').onclick=()=>{powered=true;$('power').hidden=true;tune(selected)};
+$('up').onclick=()=>tune(selected+1);$('down').onclick=()=>tune(selected-1);
+$('live').onclick=()=>{if(!powered){$('power').click();return}tune(selected)};
+async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(video.requestFullscreen)await video.requestFullscreen();else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen()}catch(e){$('status').textContent='Use the fullscreen control on the video.'}}
+$('fullscreen').onclick=fullscreen;
+video.addEventListener('waiting',()=>{if(powered)$('status').textContent='Buffering signal…'});
+video.addEventListener('playing',()=>{$('status').textContent='Signal acquired · '+CHANNELS[selected].name});
+video.addEventListener('ended',()=>{if(ready){$('status').textContent='Tape ended before the scheduled boundary. Retune live or choose another channel.'}});
+document.addEventListener('keydown',e=>{if(e.target.closest('video,input,textarea,select')||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowUp'){e.preventDefault();tune(selected+1)}else if(e.key==='ArrowDown'){e.preventDefault();tune(selected-1)}else if(e.key.toLowerCase()==='f')fullscreen();else if(e.key.toLowerCase()==='l')$('live').click()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();if(powered&&ready){try{seekLive()}catch(e){}}}});
+render();setInterval(render,1000);
+</script>
 </body>
 </html>
